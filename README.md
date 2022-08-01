@@ -4,6 +4,8 @@ This is a step by step tutorial to add CircleCI to your project. It is a continu
 
 Big shoutout to marvelous [Donny](https://github.com/donnyhyon) & fabulous [Gabby](https://github.com/gab-bernotaite) for working on a tutorial with me, thanks guys! ❤️
 
+To start the tutorial clone this github repo.
+
 1. Create a .gitignore file (`touch .gitignore`) (if not already there). Add following to file:
 ```
 node_modules

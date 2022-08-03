@@ -44,6 +44,8 @@ in .env (example string, customise it with your username & password)
 DATABASE_URL = mongodb+srv://nishant:*******@cluster0.xduyh.mongodb.net/testDatabase
 ```
 
+Make sure to include .env file in your .gitignore!
+
 9. Open MongoDB Compass and paste the same link in there:
 
 ![MongoDB Compass](https://www.freecodecamp.org/news/content/images/2022/02/Screenshot-2022-02-19-134347.jpeg)

@@ -64,13 +64,13 @@ npm i govuk-frontend --save
 ```
 npm i mongoose dotenv
 ```
-13. In index.js require configuration from protected dotenv file
+13. In *index.js* require configuration from protected dotenv file
 
 ```javascript
 require('dotenv').config();
 ```
 
-14. In index.js connect the app to the previously created database
+14. In *index.js* connect the app to the previously created database
 
 ```javascript
 // add json
@@ -92,28 +92,28 @@ database.once('connected', () => {
 ```
 # Routing
 
-15. Create a routes.js file in src folder -> this is where we will move all the routes that express is using so that index.js is only used to manipulate the logic of the whole app, rather than the logic of each individual route/page
+15. Create a *routes.js* file in src folder -> this is where we will move all the routes that express is using so that index.js is only used to manipulate the logic of the whole app, rather than the logic of each individual route/page
 
 ```
 touch src/routes.js
 ```
 
-in index.js file remember to require routes.js file:
+in *index.js* file remember to require *routes.js* file:
 ```javascript
 const routes = require('./routes');
 app.use('/', routes)
 ```
 
-16. In the routes file add:
+16. In the *routes.js* file add:
 ```javascript
 const express = require('express');
 const router = express.Router();
 module.exports = router;
 ```
 
-Then, cut all the **routes - only routes!** from the index.js and paste them into routes.js. <span style="color:red">Remember to change app.request_name to router.request_name!</span>
+Then, cut all the **routes - only routes!** from the *index.js* and paste them into *routes.js*. <span style="color:red">Remember to change app.request_name to router.request_name!</span>
 
-This is what your index.js file should look like:
+This is what your *index.js* file should look like:
 
 ```javascript
 // Import protected information from .env file
@@ -153,7 +153,7 @@ console.log(`App running on port ${PORT} http://localhost:${PORT}`)
 })
 ```
 
-This is what your routes.js file should look like:
+This is what your *routes.js* file should look like:
 
 ```javascript
 const express = require('express');
@@ -182,7 +182,7 @@ router.get('/template', (req, res) => {
 // Routes from previous tutorials above
 ```
 
-*** routes.js should only be handling the routes & the model - everything else should happen in index.js ***
+***routes.js should only be handling the routes & the model - everything else should happen in index.js***
 
 17. At this point test the application by running the server. 
 
@@ -193,13 +193,13 @@ If anything is not working first and foremost check if the paths to imported fil
 # Creating a Model
 To be able to add to a database we need to create a model that can be stored in it. Broadly speaking, this is an equivalent of a class in Ruby and represents a single type of data, for example Users or Documents. Models have their properties, which in JavaScript are represented as an object (hash), such as name, address, age etc. The ***schema*** is a name for the structure of data in the database.
 
-18. Create a models folder & user.js file
+18. Create a models folder & *user.js* file
 ```
 mkdir models
 touch models/user.js
 ```
 
-19. In user.js paste:
+19. In *user.js* paste:
 
 ```javascript
 const mongoose = require('mongoose');
@@ -213,7 +213,7 @@ const dataSchema = new mongoose.Schema({
 module.exports = mongoose.model('Data', dataSchema)
 ```
 
-20. Import the user model in routes.js file:
+20. Import the user model in *routes.js* file:
 ```javascript
 const Model = require('../models/user');
 ```
@@ -222,7 +222,7 @@ const Model = require('../models/user');
 
 # CRUD actions on the database
 Below instructions how to do 5 CRUD actions:
-Create, Read, Read all, Updade, Delete. All code to be written in routes.js file.
+Create, Read, Read all, Updade, Delete. All code to be written in *routes.js* file.
 
 If you don't want to build the front end of the app just yet, [Postman](https://www.postman.com/downloads/) is a great way to test all the queries that you make to the database. If you decide to use it, start the server and in Postman paste the path for the request you want to test & select the type of request (ex Post).
 ![Postman](https://www.freecodecamp.org/news/content/images/2022/02/Screenshot-2022-02-19-141237.jpeg)

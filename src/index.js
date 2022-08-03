@@ -1,44 +1,35 @@
+// Import protected information from .env file
+require('dotenv').config();
+// Import the routes file:
+const routes = require('./routes');
+
 const express = require('express')
-const app = express()
-const path = require('path')
-const PORT = 3000
-const https = require('https')
+const path = require('path');
+const PORT = 3000;
+const app = express();
 
-app.use(express.static(path.join(__dirname, 'public')));
+// Connect to database
+const mongoose = require('mongoose');
+const mongoString = process.env.DATABASE_URL;
 
-app.get('/', (req, res) => {
-    
-    const url = 'https://v2.jokeapi.dev/joke/Programming';
-    https.get(url, function(response) {
-        response.on("data", function(data){
-            const jokeData = JSON.parse(data);
-            console.log(jokeData);
-        })
-    })
+mongoose.connect(mongoString);
+const database = mongoose.connection;
 
-    // const joke = $.getJSON(`https://v2.jokeapi.dev/joke/Programming`).then(response => response.json())
-    // console.log(joke);
-    
-    // if (joke.joke) {
-    //   document.getElementById('joke-all').innerHTML = joke.joke;
-    // } else {
-    //   document.getElementById('joke-setup').innerHTML = joke.setup;
-    //   document.getElementById('joke-delivery').innerHTML = joke.delivery;
-    // }
-
-    res.sendFile(path.join(__dirname, 'pages/index.html'))
+database.on('error', (error) => {
+    console.log(error)
 })
 
-app.get('/start', (req, res) => {
-    res.sendFile(path.join(__dirname, 'pages/start.html'))
+database.once('connected', () => {
+    console.log('Database Connected');
 })
 
-app.get('/template', (req, res) => {
-    res.sendFile(path.join(__dirname, 'pages/template.html'))
-})
+
+app.use('/', routes);
+
+app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '../public')))
 
 app.listen(PORT, () => {
-console.log(`App running on port ${PORT} http:localhost:${PORT}`)
+console.log(`App running on port ${PORT} http://localhost:${PORT}`)
 })

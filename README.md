@@ -39,6 +39,7 @@ To start the tutorial clone [this github repo](https://github.com/PatMiekina/cir
 touch .env
 ```
 
+
 in .env (example string, customise it with your username & password)
 ```
 DATABASE_URL = mongodb+srv://nishant:*******@cluster0.xduyh.mongodb.net/testDatabase

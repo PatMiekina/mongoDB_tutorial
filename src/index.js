@@ -15,6 +15,7 @@ const mongoString = process.env.DATABASE_URL;
 mongoose.connect(mongoString);
 const database = mongoose.connection;
 
+app.use(express.json());
 
 // from previous tutorial
 app.use(express.static(path.join(__dirname, '../public')))

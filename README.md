@@ -84,6 +84,8 @@ const mongoString = process.env.DATABASE_URL;
 mongoose.connect(mongoString);
 const database = mongoose.connection;
 
+// here you will past the existing code app.use(json()), app.listen, app.use(static), app.use(routes) etc, see step 16.
+
 // test if connected to the database
 database.on('error', (error) => {
     console.log(error)
@@ -136,6 +138,17 @@ const mongoString = process.env.DATABASE_URL;
 mongoose.connect(mongoString);
 const database = mongoose.connection;
 
+app.use('/', routes);
+
+// it is important that this bit is above app.listen!
+app.use(express.json());
+
+app.use(express.static(path.join(__dirname, '../public')))
+
+app.listen(PORT, () => {
+    console.log(`App running on port ${PORT} http://localhost:${PORT}`)
+})
+
 database.on('error', (error) => {
     console.log(error)
 })
@@ -144,16 +157,6 @@ database.once('connected', () => {
     console.log('Database Connected');
 })
 
-
-app.use('/', routes);
-
-app.use(express.json());
-
-app.use(express.static(path.join(__dirname, '../public')))
-
-app.listen(PORT, () => {
-console.log(`App running on port ${PORT} http://localhost:${PORT}`)
-})
 ```
 
 This is what your *routes.js* file should look like:

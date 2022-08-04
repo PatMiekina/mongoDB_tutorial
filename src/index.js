@@ -15,21 +15,21 @@ const mongoString = process.env.DATABASE_URL;
 mongoose.connect(mongoString);
 const database = mongoose.connection;
 
+
+// from previous tutorial
+app.use(express.static(path.join(__dirname, '../public')))
+
+app.listen(PORT, () => {
+console.log(`App running on port ${PORT} http://localhost:${PORT}`)
+})
+
+app.use('/', routes);
+
+// check if database connected
 database.on('error', (error) => {
     console.log(error)
 })
 
 database.once('connected', () => {
     console.log('Database Connected');
-})
-
-
-app.use('/', routes);
-
-app.use(express.json());
-
-app.use(express.static(path.join(__dirname, '../public')))
-
-app.listen(PORT, () => {
-console.log(`App running on port ${PORT} http://localhost:${PORT}`)
 })

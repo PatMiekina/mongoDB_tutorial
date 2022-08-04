@@ -138,9 +138,7 @@ const mongoString = process.env.DATABASE_URL;
 mongoose.connect(mongoString);
 const database = mongoose.connection;
 
-app.use('/', routes);
-
-// it is important that this bit is above app.listen!
+// it is important that this bit is above app.use('/', routes)!
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '../public')))
@@ -148,6 +146,8 @@ app.use(express.static(path.join(__dirname, '../public')))
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT} http://localhost:${PORT}`)
 })
+
+app.use('/', routes);
 
 database.on('error', (error) => {
     console.log(error)

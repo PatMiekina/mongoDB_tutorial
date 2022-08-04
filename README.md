@@ -224,8 +224,6 @@ module.exports = mongoose.model('Data', dataSchema)
 const Model = require('../models/user');
 ```
 
-# Part below - not working yet, will be updated
-
 # CRUD actions on the database
 Below instructions how to do 5 CRUD actions:
 Create, Read, Read all, Updade, Delete. All code to be written in *routes.js* file.
